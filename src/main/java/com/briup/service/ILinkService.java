@@ -11,5 +11,5 @@ public interface ILinkService {
 	
 	public Link findById(Integer id);
 	
-	public void deleteById(Integer id)throws Exception;
+	public void deleteById(int id)throws Exception;
 }

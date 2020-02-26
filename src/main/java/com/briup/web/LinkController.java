@@ -52,14 +52,14 @@ public class LinkController {
 	@DeleteMapping("/deleteById")
 	@ApiOperation("根据id删除一个链接")
 	@ApiImplicitParam(name="id",value = "链接id",paramType = "query",dataType = "int",required = true)
-	public Message<String> deleteById(Integer id){
+	public Message<String> deleteById(int id){
 		Message<String> message = null;
 		try {
 			linkService.deleteById(id);
 			message = MessageUtil.success("删除成功");
 		} catch (Exception e) {
 			System.out.println("---------"+e.getMessage());
-			message = MessageUtil.error(500, "该id在数据库中不存在");
+			message = MessageUtil.error(500, e.getMessage());
 		}
 		return message;
 	}

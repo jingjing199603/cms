@@ -16,7 +16,7 @@ public class LinkServiceImpl implements ILinkService{
 	@Autowired
 	private LinkDao linkDao;
 	
-	@Override
+	@Override     
 	public void saveOrUpdate(Link link) throws CustomerException {
 		if(link!=null) {
 			Integer id = link.getId();
@@ -58,14 +58,16 @@ public class LinkServiceImpl implements ILinkService{
 	}
 
 	@Override
-	public void deleteById(Integer id) throws Exception  {
+	public void deleteById(int id) throws Exception  {
 		//根据di查询link,如果link不存在说明id在数据库中不存在
-		Link link = linkDao.findById(id).get();
+		Optional<Link> opt = linkDao.findById(id);
+		Link link = opt.isPresent()?opt.get():null;
 		if(link!=null) {
 			linkDao.deleteById(id);
 		}else {
 			throw new Exception("该id在数据库中不存在");
 		}
+		
 	}
 
 }
