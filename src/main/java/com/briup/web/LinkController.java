@@ -30,7 +30,10 @@ public class LinkController {
 	@PutMapping("/saveOrUpdate")
 	@ApiOperation("保存或者更新链接信息,如果id为空则为保存，否则为更新")
 	public Message<String> saveOrUpdate(Link link){
-		//linkService.saveOrUpdate(link);
+		try {
+			linkService.saveOrUpdate(link);
+		} catch (CustomerException e) {
+		}
 		return MessageUtil.success("保存成功");
 	}
 	

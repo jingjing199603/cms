@@ -53,7 +53,8 @@ public class LinkServiceImpl implements ILinkService{
 
 	@Override
 	public Link findById(Integer id) {
-		Link link = linkDao.findById(id).get();
+		Optional<Link> opt = linkDao.findById(id);
+		Link link = opt.isPresent()?opt.get():null;
 		return link;
 	}
 
