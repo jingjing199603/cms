@@ -17,16 +17,18 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name="cms_category")
-@JsonIgnoreProperties(value={"transportOrders"})  
+@ApiModel
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value="栏目id")
 	private Integer id;
+	@ApiModelProperty(value="栏目编码")
 	private long code;
+	@ApiModelProperty(value="栏目名称")
 	private String name;
 	
-	@OneToMany(mappedBy ="category", cascade = CascadeType.ALL)
-	private List<Article> articles;
+	
 	
 	public Category() {}
 
@@ -54,13 +56,7 @@ public class Category {
 	
 
 	
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}
+	
 
 	public long getCode() {
 		return code;

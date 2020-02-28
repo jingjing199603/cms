@@ -53,9 +53,7 @@ public class CategoryController {
 	@PutMapping("/saveOrUpdate")
 	@ApiOperation("保存或更")
 	
-	public Message<String> saveOrUpdate(@RequestParam(required = false)Integer id,String name,int code){
-		System.out.println("id:----------"+id);
-		Category category = new Category(id, code, name);
+	public Message<String> saveOrUpdate(Category category){
 		Message<String> message = null;
 		try {
 			categoryService.saveOrUpdate(category);
