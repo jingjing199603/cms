@@ -34,7 +34,7 @@ public class ArticleServiceImpl implements IArticleService{
 				if(title!=null) {
 					article_db.setTitle(title);
 				}
-				if(category.getId()!=null) {
+				if(category!=null) {
 					article_db.setCategory(category);
 				}
 				articleDao.save(article_db);

@@ -32,26 +32,10 @@ public class ArticleController {
 	
 	
 	@PutMapping("/saveOrUpdate")
-	@ApiOperation("/保存或更新一个文章")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="id",value = "文章id",paramType = "query",dataType = "int"),
-		@ApiImplicitParam(name="title",value = "文章标题",paramType = "query",dataType = "string"),
-		@ApiImplicitParam(name="author",value = "作者",paramType = "query",dataType = "string"),
-		@ApiImplicitParam(name="categoryId",value = "栏目id",paramType = "query",dataType = "int")
-	})
-	public Message<String> saveOrUpdate(Integer id,String title,String author,String content,Integer categoryId){
+	@ApiOperation(value="/保存或更新一个文章",notes = "category.code,category.name可以不用写")
+	public Message<String> saveOrUpdate(Article article){
 		Message<String> message = null;
 		try {
-			Article article = new Article();
-			article.setContent(content);
-			article.setId(id);
-			article.setTitle(title);
-			article.setAuthor(author);
-			article.setPublishDate(new Date());
-			article.setClickTimes(0);
-			Category category = new Category();
-			category.setId(categoryId);
-			article.setCategory(category);
 			articleService.saveOrUpdate(article);
 			message = MessageUtil.success("保存成功");
 		} catch (Exception e) {
@@ -68,6 +52,7 @@ public class ArticleController {
 		Message<ArticleCategory> message = null;
 		try {
 			Article article = articleService.findById(id);
+			//article category
 			ArticleCategory ac = new ArticleCategory
 			(article.getId(), article.getAuthor(), article.getClickTimes(), 
 					article.getContent(), article.getPublishDate(), article.getTitle(),

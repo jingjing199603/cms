@@ -28,8 +28,7 @@ public class Category {
 	@ApiModelProperty(value="栏目名称")
 	private String name;
 	
-	
-	
+		
 	public Category() {}
 
 	public Category(long code, String name) {
